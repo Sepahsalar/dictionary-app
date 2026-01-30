@@ -7,10 +7,20 @@ function pickBestAudio(entry: DictionaryEntry): string | null {
 
 type Props = {
   entry: DictionaryEntry;
+  fallbackAudioUrl?: string | null;
 };
 
-export function MeaningCard({ entry }: Props) {
-  const audioUrl = pickBestAudio(entry);
+export function MeaningCard({ entry, fallbackAudioUrl }: Props) {
+  const sourceUrl = entry.sourceUrls?.find(Boolean) ?? null;
+
+  function getDomain(url: string) {
+    try {
+      return new URL(url).hostname.replace(/^www\./, "");
+    } catch {
+      return url;
+   }
+  }
+  const audioUrl = pickBestAudio(entry) ?? fallbackAudioUrl ?? null;
 
   const play = async () => {
     if (!audioUrl) return;
@@ -34,7 +44,22 @@ export function MeaningCard({ entry }: Props) {
           </p>
         </div>
 
-        <button
+		<button
+			type="button"
+			onClick={play}
+			disabled={!audioUrl}
+			className={[
+				"rounded-xl border px-3 py-2 text-sm font-medium transition",
+				audioUrl
+				? "border-slate-700 bg-slate-900/60 text-slate-200 hover:bg-slate-900"
+				: "border-slate-800 bg-slate-950/40 text-slate-500 cursor-not-allowed",
+			].join(" ")}
+			title={audioUrl ? "Play pronunciation" : "No audio available for this entry"}
+			>
+			{audioUrl ? "🔊 Play" : "🔇 No audio"}
+		</button>
+
+        {/* <button
           type="button"
           onClick={play}
           disabled={!audioUrl}
@@ -42,7 +67,7 @@ export function MeaningCard({ entry }: Props) {
           title={audioUrl ? "Play pronunciation" : "No audio available"}
         >
           🔊
-        </button>
+        </button> */}
       </div>
 
       <div className="mt-5 space-y-5">
@@ -74,7 +99,29 @@ export function MeaningCard({ entry }: Props) {
         ))}
       </div>
 
-      {entry.sourceUrls?.[0] ? (
+		<div className="mt-5">
+		{sourceUrl ? (
+			<a
+			className="text-sm text-slate-300 hover:text-white"
+			href={sourceUrl}
+			target="_blank"
+			rel="noreferrer"
+			>
+			Source: {getDomain(sourceUrl)}
+			</a>
+		) : (
+			<a
+			className="text-sm text-slate-300 hover:text-white"
+			href={`https://en.wiktionary.org/wiki/${encodeURIComponent(entry.word)}`}
+			target="_blank"
+			rel="noreferrer"
+			title="Fallback source"
+			>
+			Source: wiktionary.org
+			</a>
+		)}
+</div>
+      {/* {entry.sourceUrls?.[0] ? (
         <a
           className="mt-5 inline-block text-sm text-slate-300 hover:text-white"
           href={entry.sourceUrls[0]}
@@ -83,7 +130,7 @@ export function MeaningCard({ entry }: Props) {
         >
           Source
         </a>
-      ) : null}
+      ) : null} */}
     </div>
   );
 }
