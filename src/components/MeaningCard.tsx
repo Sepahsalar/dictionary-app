@@ -1,4 +1,5 @@
 import type { DictionaryEntry } from "../types/dictionary";
+import { ExternalLink, Volume2, VolumeX } from "lucide-react";
 
 function pickBestAudio(entry: DictionaryEntry): string | null {
   const audio = entry.phonetics?.find((p) => p.audio && p.audio.length > 0)?.audio;
@@ -33,11 +34,18 @@ export function MeaningCard({ entry, fallbackAudioUrl }: Props) {
   };
 
   return (
-    <div className="mt-6 rounded-2xl border border-slate-700 bg-slate-900/40 p-5">
+    // <div className="mt-6 rounded-2xl border border-slate-700 bg-slate-900/40 p-5">
+	<div className="mt-6 rounded-2xl border p-5
+                border-slate-200 bg-white
+                dark:border-slate-700 dark:bg-slate-900/40">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h2 className="text-2xl font-semibold text-white">{entry.word}</h2>
-          <p className="mt-1 text-slate-300">
+          {/* <h2 className="text-2xl font-semibold text-white">{entry.word}</h2>
+          <p className="mt-1 text-slate-300"> */}
+		  <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">
+			{entry.word}
+		</h2>
+		<p className="mt-1 text-slate-600 dark:text-slate-300">
             {entry.phonetic ||
               entry.phonetics?.find((p) => p.text)?.text ||
               "—"}
@@ -45,6 +53,24 @@ export function MeaningCard({ entry, fallbackAudioUrl }: Props) {
         </div>
 
 		<button
+			type="button"
+			onClick={play}
+			disabled={!audioUrl}
+			className={[
+				"rounded-xl border px-3 py-2 text-sm font-medium transition inline-flex items-center gap-2",
+				audioUrl
+				? "border-slate-200 bg-slate-50 text-slate-900 hover:bg-slate-100 " +
+					"dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-900"
+				: "border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed " +
+					"dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-500",
+			].join(" ")}
+			title={audioUrl ? "Play pronunciation" : "No audio available for this entry"}
+			>
+			{audioUrl ? <Volume2 size={16} /> : <VolumeX size={16} />}
+			<span>{audioUrl ? "Play" : "No audio"}</span>
+		</button>
+
+		{/* <button
 			type="button"
 			onClick={play}
 			disabled={!audioUrl}
@@ -57,7 +83,7 @@ export function MeaningCard({ entry, fallbackAudioUrl }: Props) {
 			title={audioUrl ? "Play pronunciation" : "No audio available for this entry"}
 			>
 			{audioUrl ? "🔊 Play" : "🔇 No audio"}
-		</button>
+		</button> */}
 
         {/* <button
           type="button"
@@ -74,21 +100,26 @@ export function MeaningCard({ entry, fallbackAudioUrl }: Props) {
         {entry.meanings.map((m) => (
           <div key={`${entry.word}-${m.partOfSpeech}`} className="space-y-2">
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-slate-200">
+              {/* <span className="text-sm font-medium text-slate-200"> */}
+			  <span className="text-sm font-medium text-slate-700 dark:text-slate-200">
                 {m.partOfSpeech}
               </span>
-              <div className="h-px flex-1 bg-slate-800" />
+              {/* <div className="h-px flex-1 bg-slate-800" /> */}
+			  <div className="h-px flex-1 bg-slate-200 dark:bg-slate-800" />
             </div>
 
             <ul className="space-y-2">
               {m.definitions.slice(0, 3).map((d, idx) => (
-                <li key={idx} className="text-slate-100">
+                // <li key={idx} className="text-slate-100">
+				<li key={idx} className="text-slate-900 dark:text-slate-100">
                   <p className="leading-relaxed">
-                    <span className="text-slate-400 mr-2">•</span>
+                    {/* <span className="text-slate-400 mr-2">•</span> */}
+					<span className="text-slate-400 dark:text-slate-400 mr-2">•</span>
                     {d.definition}
                   </p>
                   {d.example ? (
-                    <p className="mt-1 text-slate-300 italic">
+                    // <p className="mt-1 text-slate-300 italic">
+					<p className="mt-1 text-slate-600 dark:text-slate-300 italic">
                       “{d.example}”
                     </p>
                   ) : null}
@@ -100,27 +131,56 @@ export function MeaningCard({ entry, fallbackAudioUrl }: Props) {
       </div>
 
 		<div className="mt-5">
-		{sourceUrl ? (
-			<a
-			className="text-sm text-slate-300 hover:text-white"
-			href={sourceUrl}
-			target="_blank"
-			rel="noreferrer"
-			>
-			Source: {getDomain(sourceUrl)}
-			</a>
-		) : (
-			<a
-			className="text-sm text-slate-300 hover:text-white"
-			href={`https://en.wiktionary.org/wiki/${encodeURIComponent(entry.word)}`}
-			target="_blank"
-			rel="noreferrer"
-			title="Fallback source"
-			>
-			Source: wiktionary.org
-			</a>
-		)}
-</div>
+			{sourceUrl ? (
+				<a
+				className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900
+							dark:text-slate-300 dark:hover:text-white"
+				href={sourceUrl}
+				target="_blank"
+				rel="noreferrer"
+				title="Open source"
+				>
+				<ExternalLink size={14} />
+				<span>Source: {getDomain(sourceUrl)}</span>
+				</a>
+			) : (
+				<a
+				className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900
+							dark:text-slate-300 dark:hover:text-white"
+				href={`https://en.wiktionary.org/wiki/${encodeURIComponent(entry.word)}`}
+				target="_blank"
+				rel="noreferrer"
+				title="Fallback source"
+				>
+				<ExternalLink size={14} />
+				<span>Source: wiktionary.org</span>
+				</a>
+			)}
+		</div>
+		
+		{/* <div className="mt-5">
+			{sourceUrl ? (
+				<a
+				className="text-sm text-slate-300 hover:text-white"
+				href={sourceUrl}
+				target="_blank"
+				rel="noreferrer"
+				>
+				Source: {getDomain(sourceUrl)}
+				</a>
+			) : (
+				<a
+				className="text-sm text-slate-300 hover:text-white"
+				href={`https://en.wiktionary.org/wiki/${encodeURIComponent(entry.word)}`}
+				target="_blank"
+				rel="noreferrer"
+				title="Fallback source"
+				>
+				Source: wiktionary.org
+				</a>
+			)}
+		</div> */}
+
       {/* {entry.sourceUrls?.[0] ? (
         <a
           className="mt-5 inline-block text-sm text-slate-300 hover:text-white"

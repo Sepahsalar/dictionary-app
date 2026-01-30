@@ -7,6 +7,8 @@ import { HistoryChips } from "./components/HistoryChips";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { fetchDefinition, NotFoundError } from "./lib/dictionaryApi";
 import type { DictionaryEntry } from "./types/dictionary";
+import { Github } from "lucide-react";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 type FetchState =
   | { status: "idle" }
@@ -123,9 +125,49 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 text-slate-100">
+    // <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 text-slate-100">
+	<div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-gradient-to-b dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 dark:text-slate-100">
       <div className="mx-auto max-w-3xl px-4 py-10">
         <header className="mb-8">
+			<div className="flex items-start justify-between gap-4">
+			  <div>
+				<div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm
+								border-slate-200 bg-white text-slate-700
+								dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-200">
+					<span>📚</span>
+					<span>React + TypeScript</span>
+					<span className="text-slate-400 dark:text-slate-500">•</span>
+					<span>Dictionary</span>
+				</div>
+
+				<h1 className="mt-4 text-4xl font-semibold tracking-tight">
+					Dictionary App
+				</h1>
+				<p className="mt-2 text-slate-600 dark:text-slate-300">
+					Search meanings with clean UI states (loading, error, results), history, and audio.
+				</p>
+				</div>
+
+				<div className="flex items-center gap-2">
+				<a
+					className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm font-medium transition
+							border-slate-200 bg-white text-slate-900 hover:bg-slate-50
+							dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-900"
+					href="https://github.com/sepahsalar/dictionary-app"
+					target="_blank"
+					rel="noreferrer"
+					title="Open GitHub repo"
+				>
+					<Github size={16} />
+					<span className="hidden sm:inline">GitHub</span>
+				</a>
+
+				<ThemeToggle />
+				</div>
+			  </div>
+			</header>
+
+		{/* <header className="mb-8">
           <div className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/40 px-3 py-1 text-sm text-slate-200">
             <span>React + TypeScript</span>
             <span className="text-slate-500">•</span>
@@ -139,7 +181,7 @@ export default function App() {
             Search definitions with clear UI states (loading, error, results), history,
             and pronunciation when available.
           </p>
-        </header>
+        </header> */}
 
         <SearchBar
           value={query}
