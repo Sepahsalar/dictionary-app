@@ -128,43 +128,44 @@ export default function App() {
     // <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 text-slate-100">
 	<div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-gradient-to-b dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 dark:text-slate-100">
       <div className="mx-auto max-w-3xl px-4 py-10">
-        <header className="mb-8">
-			<div className="flex items-start justify-between gap-4">
-			  <div>
-				<div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm
-								border-slate-200 bg-white text-slate-700
-								dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-200">
-					<span>📚</span>
-					<span>React + TypeScript</span>
-					<span className="text-slate-400 dark:text-slate-500">•</span>
-					<span>Dictionary</span>
-				</div>
+		<div className="rounded-3xl border border-slate-200 bg-white/70 p-6 shadow-sm dark:border-slate-800 dark:bg-transparent dark:shadow-none">
+			<header className="mb-8">
+			  <div className="flex items-start justify-between gap-4">
+				<div>
+					<div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm
+									border-slate-200 bg-white text-slate-700
+									dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-200">
+						<span>📚</span>
+						<span>React + TypeScript</span>
+						<span className="text-slate-400 dark:text-slate-500">•</span>
+						<span>Dictionary</span>
+					</div>
 
-				<h1 className="mt-4 text-4xl font-semibold tracking-tight">
-					Dictionary App
-				</h1>
-				<p className="mt-2 text-slate-600 dark:text-slate-300">
-					Search meanings with clean UI states (loading, error, results), history, and audio.
-				</p>
-				</div>
+					<h1 className="mt-4 text-4xl font-semibold tracking-tight">
+						Dictionary App
+					</h1>
+					<p className="mt-2 text-slate-600 dark:text-slate-300">
+						Search meanings with clean UI states (loading, error, results), history, and audio.
+					</p>
+					</div>
 
-				<div className="flex items-center gap-2">
-				<a
-					className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm font-medium transition
-							border-slate-200 bg-white text-slate-900 hover:bg-slate-50
-							dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-900"
-					href="https://github.com/sepahsalar/dictionary-app"
-					target="_blank"
-					rel="noreferrer"
-					title="Open GitHub repo"
-				>
-					<Github size={16} />
-					<span className="hidden sm:inline">GitHub</span>
-				</a>
+					<div className="flex items-center gap-2">
+					<a
+						className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm font-medium transition
+								border-slate-200 bg-white text-slate-900 hover:bg-slate-50
+								dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-100 dark:hover:bg-slate-900"
+						href="https://github.com/sepahsalar/dictionary-app"
+						target="_blank"
+						rel="noreferrer"
+						title="Open GitHub repo"
+					>
+						<Github size={16} />
+						<span className="hidden sm:inline">GitHub</span>
+					</a>
 
-				<ThemeToggle />
+					<ThemeToggle />
+					</div>
 				</div>
-			  </div>
 			</header>
 
 		{/* <header className="mb-8">
@@ -223,7 +224,8 @@ export default function App() {
 						<button
 							type="button"
 							onClick={() => setShowOthers((v) => !v)}
-							className="text-sm text-slate-300 hover:text-white"
+							// className="text-sm text-slate-300 hover:text-white"
+							className="text-sm text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
 						>
 							{showOthers ? "Hide other entries" : `Show other entries (${rest.length})`}
 						</button>
@@ -271,19 +273,24 @@ export default function App() {
         ) : null} */}
 
         {state.status === "idle" ? (
-          <div className="mt-8 rounded-2xl border border-slate-700 bg-slate-900/40 p-5">
-            <p className="text-slate-200 font-medium">Try searching for a word</p>
-            <p className="mt-1 text-slate-300">
+          <div className="mt-8 rounded-2xl border p-5 border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900/40">
+			<p className="font-medium text-slate-900 dark:text-slate-100">Try searching for a word</p>
+			<p className="mt-1 text-slate-600 dark:text-slate-300">
+		{/* //   <div className="mt-8 rounded-2xl border border-slate-700 bg-slate-900/40 p-5">
+        //     <p className="text-slate-200 font-medium">Try searching for a word</p>
+        //     <p className="mt-1 text-slate-300"> */}
               You can search even 1-letter words. Results appear only after you press
               Search.
             </p>
           </div>
         ) : null}
 
-        <footer className="mt-10 text-sm text-slate-400">
+        {/* <footer className="mt-10 text-sm text-slate-400"> */}
+		<footer className="mt-10 text-sm text-slate-500 dark:text-slate-400">
           Built with React, TypeScript, Vite, Tailwind.
         </footer>
       </div>
+	 </div>
     </div>
   );
 }
