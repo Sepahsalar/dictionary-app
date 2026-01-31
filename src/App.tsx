@@ -62,6 +62,11 @@ export default function App() {
   );
   const [state, setState] = useState<FetchState>({ status: "idle" });
 
+  const resetToIdle = () => {
+	setShowOthers(false);
+	setState({ status: "idle" });
+  };
+  
   const runSearch = async (raw: string) => {
     const word = normalizeWord(raw);
 
@@ -151,7 +156,10 @@ export default function App() {
 
         <SearchBar
           value={query}
-          onChange={setQuery}
+		  onChange={(v) => {
+			setQuery(v);
+			if (v.trim().length === 0) resetToIdle();
+		  }}
           onSubmit={onSubmit}
           isLoading={state.status === "loading"}
         />

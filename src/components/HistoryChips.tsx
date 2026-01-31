@@ -10,14 +10,14 @@ export function HistoryChips({ items, onPick, onClear }: Props) {
   return (
     <div className="mt-4">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-slate-300">Recent</p>
-        <button
-          onClick={onClear}
-          className="text-sm text-slate-300 hover:text-white"
-          type="button"
-        >
-          Clear
-        </button>
+        <p className="text-sm text-slate-600 dark:text-slate-300">Recent</p>
+		<button
+			onClick={onClear}
+			className="text-sm text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+			type="button"
+			>
+			Clear
+		</button>
       </div>
 
       <div className="mt-2 flex flex-wrap gap-2">
