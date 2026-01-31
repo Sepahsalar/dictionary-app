@@ -26,7 +26,9 @@ export function HistoryChips({ items, onPick, onClear }: Props) {
             key={w}
             type="button"
             onClick={() => onPick(w)}
-            className="px-3 py-1.5 rounded-full bg-slate-900/60 border border-slate-700 text-slate-200 hover:bg-slate-900"
+            className="px-3 py-1.5 rounded-full border text-sm transition
+						border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900
+						dark:border-slate-700 dark:bg-slate-900/60 dark:text-slate-200 dark:hover:bg-slate-900"
             title={`Search "${w}"`}
           >
             {w}

@@ -31,9 +31,9 @@ export function SearchBar({ value, onChange, onSubmit, isLoading }: Props) {
             value={value}
             onChange={(e) => onChange(e.target.value)}
             placeholder="e.g., resilient"
-            className="w-full rounded-xl border pl-10 pr-10 py-3 outline-none transition
+			className="w-full rounded-xl border pl-10 pr-10 py-3 outline-none transition
                        border-slate-200 bg-white text-slate-900 placeholder:text-slate-400
-                       focus:ring-2 focus:ring-slate-300
+                       focus:ring-2 focus:ring-indigo-200 focus:border-indigo-300
                        dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:ring-slate-500"
           />
 
@@ -53,9 +53,10 @@ export function SearchBar({ value, onChange, onSubmit, isLoading }: Props) {
         <button
           type="submit"
           disabled={isLoading || value.trim().length === 0}
-          className="rounded-xl px-4 py-3 font-medium transition inline-flex items-center gap-2
-                     bg-slate-900 text-white hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed
-                     dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
+		  className="rounded-xl px-4 py-3 font-medium transition inline-flex items-center gap-2
+                     bg-indigo-600 text-white hover:bg-indigo-700
+					 disabled:opacity-50 disabled:cursor-not-allowed
+					 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
         >
           {isLoading ? <Loader2 className="animate-spin" size={16} /> : null}
           {isLoading ? "Searching" : "Search"}

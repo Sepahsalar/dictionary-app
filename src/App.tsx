@@ -107,9 +107,9 @@ export default function App() {
   };
 
   return (
-	<div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-gradient-to-b dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 dark:text-slate-100">
+	<div className="min-h-screen text-slate-900 bg-gradient-to-b from-slate-50 to-slate-100 dark:text-slate-100 dark:bg-gradient-to-b dark:from-slate-950 dark:via-slate-950 dark:to-slate-900">
       <div className="mx-auto max-w-3xl px-4 py-10">
-		<div className="rounded-3xl border border-slate-200 bg-white/70 p-6 shadow-sm dark:border-slate-800 dark:bg-transparent dark:shadow-none">
+		<div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-transparent dark:shadow-none">
 			<header className="mb-8">
 			  <div className="flex items-start justify-between gap-4">
 				<div>
